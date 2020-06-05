@@ -1,23 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
 
 func main() {
 
-	//for i:=0; i<=100; i++{
-	//	if i%2==0{
-	//		fmt.Println(i, "even")
-	//	}else if i%3==0{
-	//		fmt.Println(i, "odd")
-	//	}
-	//}
+		rand.Seed(time.Now().UnixNano())
+			dise := rand.Intn(6)
+			fmt.Println(dise)
+	switch dise + 1 {
 
-	for i:=1; i<=100; i++{
-		switch {
-		case i%2==0:
-			fmt.Println(i, "even")
-		default:
-			fmt.Println(i, "odds")
-		}
 	}
+			if dise==6{
+				fmt.Println("大吉")
+			}else if dise==5 || dise==4{
+				fmt.Println("中吉")
+			}else if dise==3 || dise==2{
+				fmt.Println("吉")
+			}else{
+				fmt.Println("凶")
+			}
 }
