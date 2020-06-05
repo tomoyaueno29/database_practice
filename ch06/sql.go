@@ -1,6 +1,10 @@
 package main
 
-import "database/sql"
+import (
+	"database/sql"
+	_ "github.com/lib/pq"
+	"fmt"
+)
 
 type Post struct {
 	Id int
@@ -54,8 +58,18 @@ func (post *Post) Create() (err error) {
 	return
 }
 
-func (post *Post) Update()
+func (post *Post) Update() (err error) {
+	_, err = Db.Exec("update posts set content=$2, author=$3", post.Id)
+	return
+}
+
+func (post *Post) Delete() (err error) {
+	_, err = Db.Exec("delete from posts where id=$1", post.Id)
+	return
+}
 
 func main() {
-
+	post := Post{Content: "Hello, World!!", Author: "Tomoya"}
+	post.Create()
+	fmt.Println(post)
 }
