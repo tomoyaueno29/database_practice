@@ -43,13 +43,18 @@ func GetPost(id int) (post Post, err error) {
 }
 
 func (post *Post) Create() (err error) {
-	statement := "insert into posts (content, author) values ($1, $2) returning id"
-	stmt, err := Db.Prepare(statement)
-	if err != nil {
-		return
-	}
-	
+	//statement := "insert into posts (content, author) values ($1, $2) returning id"
+	//stmt, err := Db.Prepare(statement)
+	//if err != nil {
+	//	return
+	//}
+	//defer stmt.Close()
+	//err = stmt.QueryRow(post.Content, post.Author).Scan(&post.Id)
+	err = Db.QueryRow("insert into posts (content, author) values ($1, $2, $3) returning id", post.Content, post.Author).Scan(&post.Id)
+	return
 }
+
+func (post *Post) Update()
 
 func main() {
 
