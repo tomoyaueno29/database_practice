@@ -12,7 +12,7 @@ var PostById map[int]*Post
 var PostsByAuthor map[string][]*Post
 
 func store(post Post){
-	PostById[post.id] = &post
+	PostById[post.Id] = &post
 	PostsByAuthor[post.Author] = append(PostsByAuthor[post.Author], &post)
 }
 
