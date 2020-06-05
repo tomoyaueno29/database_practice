@@ -1,6 +1,10 @@
 package main
 
-import "github.com/jmoiron/sqlx"
+import (
+	"fmt"
+	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
+)
 
 type Post struct {
 	Id int
@@ -32,3 +36,11 @@ func (post *Post) Create() (err error) {
 	return
 }
 
+func main() {
+	post := Post{}
+	post.Create()
+	fmt.Println(post)
+	readPost := Post{}
+	readPost, _ = GetPost(post.Id)
+	fmt.Println(readPost)
+}
