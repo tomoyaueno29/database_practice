@@ -11,7 +11,7 @@ type Post struct {
 	Id 		 int
 	Content  string
 	Author 	 string
-	Comments []Comment
+	Comments []Comment //スライスは配列へのポインタ
 }
 
 type Comment struct {
@@ -30,6 +30,7 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
+	defer Db.Close()
 }
 
 func (comment *Comment) Create() (err error){
