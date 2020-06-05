@@ -36,7 +36,29 @@ func (post *Post) Create() (err error) {
 	return
 }
 
+func getPost(id int) (post Post, err error) {
+	post = Post{}
+	err = Db.QueryRow("select id, content, author from posts where id = $1", id).Scan(&post.Id, &post.Content, &post.Author)
+	return
+}
+
+func (post *Post) update() (err error){
+	_, err = Db.Exec("update posts set content = $2, author = $3 where id = $1", post.Id, post.Content, post.Author)
+	return
+}
+
+func (post  *Post) delete() (err error) {
+	_, err = Db.Exec("delete from posts where id = $1", post.Id)
+	return
+}
+
+
 func main() {
 	post := Post{Content: "Hello!", Author: "Sau"}
 	fmt.Println(post)
+	post.Create()
+	fmt.Println(post)
+	readPost, _ := getPost(1)
+	fmt.Println(readPost)
+	readPost.delete()
 }
